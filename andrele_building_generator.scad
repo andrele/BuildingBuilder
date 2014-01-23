@@ -1,4 +1,8 @@
-height = 600;
+// OpenSCAD Building Generator
+// Written by Andre Le
+// for Golan Levin's Interactive Art and Computational Design 2014
+
+height = 900;
 width = 10000*sin($t)+1000;
 depth = 10000*sin($t)+1000;
 gutter = .2;
@@ -9,8 +13,6 @@ tHeight = height*($t+1);
 
 // Determine how many floors fit
 floors = floor(tHeight / ((windowSize)+(gutter*width/(windowColumns+1))));
-
-
 
 translate([-width/2,-depth/2,0]){
 	difference(){
