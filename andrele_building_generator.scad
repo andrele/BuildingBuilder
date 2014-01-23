@@ -1,6 +1,6 @@
-height = 1000;
-width = 1000;
-depth = 500;
+height = 600;
+width = 10000*sin($t)+1000;
+depth = 10000*sin($t)+1000;
 gutter = .2;
 floorHeight = 10;
 windowColumns = 10;
@@ -10,8 +10,10 @@ tHeight = height*($t+1);
 // Determine how many floors fit
 floors = floor(tHeight / ((windowSize)+(gutter*width/(windowColumns+1))));
 
+
+
 translate([-width/2,-depth/2,0]){
-//	difference(){
+	difference(){
 		cube([width,depth,tHeight]);
 	
 		// Create floors
@@ -30,20 +32,28 @@ translate([-width/2,-depth/2,0]){
 							cube([windowSize,15,windowSize]);
 						}
 					}
-			
+				}
 				// Create row of windows long depth
 				rotate([0,0,90]){
-					translate([-depth+((depth*(1-gutter)/windowColumns)/2)-15,0,0]){
-						for(i = [0:windowColumns-1]) {
-							translate([i*(depth*(1-gutter)/windowColumns)+((i+1)*(gutter*depth/(windowColumns+1))),-1,(gutter*width/windowColumns)]){
+					translate([0,-13,0]){
+						for(f = [0:windowColumns-1]) {
+							translate([f*(depth*(1-gutter)/windowColumns)+((f+1)*(gutter*depth/(windowColumns+1))),-1,(gutter*width/windowColumns)]){
 								cube([depth*(1-gutter)/windowColumns,15,windowSize]);
 							}
+						
 						}
+						translate([0,-width+13,0]){
+							for(f = [0:windowColumns-1]) {
+								translate([f*(depth*(1-gutter)/windowColumns)+((f+1)*(gutter*depth/(windowColumns+1))),-1,(gutter*width/windowColumns)]){
+									cube([depth*(1-gutter)/windowColumns,15,windowSize]);
+								}
+							
+							}
 						}
 					}
 				}
 			}
 		}
-//	}
+	}
 }
 
